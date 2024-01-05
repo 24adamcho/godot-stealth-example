@@ -1,0 +1,63 @@
+[gd_scene load_steps=3 format=3 uid="uid://jjjlwb74n26p"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yl2dy"]
+albedo_color = Color(0.737255, 0.266667, 0.0313726, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_boilf"]
+albedo_color = Color(0, 0, 1, 1)
+
+[node name="Stage" type="Node"]
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 21.5598, 0)
+layers = 3
+light_energy = 15.912
+light_bake_mode = 1
+omni_range = 44.98
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="."]
+use_collision = true
+collision_layer = 3
+
+[node name="CSGBox3D" type="CSGBox3D" parent="CSGCombiner3D"]
+transform = Transform3D(7, 0, 0, 0, 7, 0, 0, 0, 7, 0, 31.5787, 0)
+size = Vector3(10, 10, 10)
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="CSGCombiner3D"]
+transform = Transform3D(7, 0, 0, 0, 7, 0, 0, 0, 7, 0, 31.5787, 0)
+operation = 2
+size = Vector3(9, 9, 9)
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.12588, 0)
+radius = 1.0
+height = 0.1
+material = SubResource("StandardMaterial3D_yl2dy")
+
+[node name="CSGCylinder3D5" type="CSGCylinder3D" parent="CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0.087212, 0)
+layers = 0
+radius = 0.01
+height = 40.801
+material = SubResource("StandardMaterial3D_boilf")
+
+[node name="CSGCylinder3D2" type="CSGCylinder3D" parent="CSGCombiner3D"]
+transform = Transform3D(0.707107, 0.707107, 3.09086e-08, 0, -4.37114e-08, 1, 0.707107, -0.707107, -3.09086e-08, 0, 0.087212, 0)
+layers = 0
+radius = 0.01
+height = 40.801
+material = SubResource("StandardMaterial3D_boilf")
+
+[node name="CSGCylinder3D3" type="CSGCylinder3D" parent="CSGCombiner3D"]
+transform = Transform3D(0.707107, -0.707107, -3.09086e-08, 0, -4.37114e-08, 1, -0.707107, -0.707107, -3.09086e-08, 0, 0.087212, 0)
+layers = 0
+radius = 0.01
+height = 40.801
+material = SubResource("StandardMaterial3D_boilf")
+
+[node name="CSGCylinder3D4" type="CSGCylinder3D" parent="CSGCombiner3D"]
+transform = Transform3D(-5.96046e-08, -1, -4.37114e-08, 0, -4.37114e-08, 1, -1, 5.96046e-08, -5.32907e-15, 0, 0.087212, 0)
+layers = 0
+radius = 0.01
+height = 40.801
+material = SubResource("StandardMaterial3D_boilf")

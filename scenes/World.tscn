@@ -1,0 +1,78 @@
+[gd_scene load_steps=10 format=3 uid="uid://cgai5pperf2ly"]
+
+[ext_resource type="PackedScene" uid="uid://jjjlwb74n26p" path="res://scenes/stage.tscn" id="1_fc1yi"]
+[ext_resource type="PackedScene" uid="uid://cofnlilfuced1" path="res://scenes/guard.tscn" id="1_u24ij"]
+[ext_resource type="Script" path="res://addons/Basic FPS Player/Src/basic_player_startup.gd" id="3_d2l0v"]
+[ext_resource type="PackedScene" uid="uid://kmyakts4l64t" path="res://addons/Basic FPS Player/Src/basic_player_head.tscn" id="4_rup4r"]
+[ext_resource type="Script" path="res://src/speeeeeeeeeen.cs" id="4_ti83y"]
+[ext_resource type="AudioStream" uid="uid://b1yxhn72f66iu" path="res://resources/speeen.wav" id="7_jkagf"]
+[ext_resource type="Script" path="res://src/loopingPlayer.cs" id="8_uh3e5"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ix5he"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_it54d"]
+albedo_color = Color(0.247059, 0.568627, 0.352941, 1)
+
+[node name="World" type="Node"]
+
+[node name="Stage" parent="." instance=ExtResource("1_fc1yi")]
+
+[node name="Guard" parent="." instance=ExtResource("1_u24ij")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0.234, 0)
+script = ExtResource("4_ti83y")
+
+[node name="Player" type="CharacterBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.12583, 2.26553, 18.5653)
+collision_layer = 3
+script = ExtResource("3_d2l0v")
+MOUSE_ACCEL = false
+KEY_BIND_UP = "move_forward"
+KEY_BIND_LEFT = "move_left"
+KEY_BIND_RIGHT = "move_right"
+KEY_BIND_DOWN = "move_back"
+
+[node name="Head" parent="Player" instance=ExtResource("4_rup4r")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Player"]
+shape = SubResource("CapsuleShape3D_ix5he")
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="."]
+use_collision = true
+collision_layer = 3
+
+[node name="CSGBox3D" type="CSGBox3D" parent="CSGCombiner3D"]
+transform = Transform3D(0.571043, 0, 0.82092, 0, 1, 0, -0.82092, 0, 0.571043, 3.46684, 1.48714, 2.38545)
+size = Vector3(5, 3, 1)
+material = SubResource("StandardMaterial3D_it54d")
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="CSGCombiner3D"]
+transform = Transform3D(0.99876, 0, 0.0497736, 0, 1, 0, -0.0497736, 0, 0.99876, -0.0295383, 1.48714, -3.47744)
+size = Vector3(5, 3, 0.001)
+material = SubResource("StandardMaterial3D_it54d")
+
+[node name="CSGBox3D5" type="CSGBox3D" parent="CSGCombiner3D"]
+transform = Transform3D(0.99876, 0, 0.0497736, 0, 1, 0, -0.0497736, 0, 0.99876, -0.0544002, 0.412357, -3.97632)
+operation = 2
+size = Vector3(3, 0.850433, 1)
+material = SubResource("StandardMaterial3D_it54d")
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="CSGCombiner3D"]
+transform = Transform3D(-0.224144, -0.965926, -0.12941, -0.5, -3.78552e-08, 0.866025, -0.836516, 0.258819, -0.482963, -3.79324, 1.42898, -0.69046)
+size = Vector3(6, 1, 0.136719)
+material = SubResource("StandardMaterial3D_it54d")
+
+[node name="CSGBox3D4" type="CSGBox3D" parent="CSGCombiner3D"]
+transform = Transform3D(-0.968556, 0.248146, 0.0179749, -0.0147545, -0.12941, 0.991481, 0.248358, 0.96004, 0.129002, 2.76108, 2.90913, 0.744525)
+size = Vector3(13, 1, 0.136719)
+material = SubResource("StandardMaterial3D_it54d")
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.7588, 0)
+stream = ExtResource("7_jkagf")
+volume_db = -20.305
+unit_size = 62.73
+area_mask = 2
+script = ExtResource("8_uh3e5")
+
+[connection signal="finished" from="AudioStreamPlayer3D" to="AudioStreamPlayer3D" method="_on_finished"]

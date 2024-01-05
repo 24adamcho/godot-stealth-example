@@ -1,0 +1,55 @@
+[gd_scene load_steps=7 format=3 uid="uid://b8ygopdnb4msb"]
+
+[ext_resource type="Script" path="res://src/textStatusSignifier.cs" id="1_124qh"]
+[ext_resource type="AudioStream" uid="uid://cxs36qt1rlck0" path="res://resources/metalgearsolid.swf.mp3" id="2_3hjhs"]
+[ext_resource type="Script" path="res://src/AlertPauseAudioPlayer.cs" id="3_pqiij"]
+[ext_resource type="AudioStream" uid="uid://bl8iwxm7twjkj" path="res://resources/oh-shit_4.mp3" id="4_v5sfs"]
+[ext_resource type="Script" path="res://src/LabelTimeRemaining.cs" id="5_y735e"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_tw1t5"]
+font_size = 61
+font_color = Color(1, 0, 0, 1)
+
+[node name="UI" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_horizontal_guides_ = [325.0]
+metadata/_edit_vertical_guides_ = [587.0]
+
+[node name="Label" type="Label" parent="."]
+visible = false
+layout_mode = 0
+offset_left = 79.0
+offset_top = 53.0
+offset_right = 144.0
+offset_bottom = 86.0
+script = ExtResource("1_124qh")
+
+[node name="AlertPauseAudioPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_3hjhs")
+max_polyphony = 2
+script = ExtResource("3_pqiij")
+
+[node name="AlertPauseAudioPlayer2" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_v5sfs")
+max_polyphony = 2
+script = ExtResource("3_pqiij")
+
+[node name="Label2" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -151.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "Test text
+0:00"
+label_settings = SubResource("LabelSettings_tw1t5")
+horizontal_alignment = 1
+script = ExtResource("5_y735e")

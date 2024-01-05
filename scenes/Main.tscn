@@ -1,0 +1,29 @@
+[gd_scene load_steps=6 format=3 uid="uid://bok0tqqbiread"]
+
+[ext_resource type="PackedScene" uid="uid://b8ygopdnb4msb" path="res://scenes/ui.tscn" id="1_im120"]
+[ext_resource type="Script" path="res://src/quit.cs" id="1_v0osp"]
+[ext_resource type="PackedScene" uid="uid://cgai5pperf2ly" path="res://scenes/World.tscn" id="2_fvmnh"]
+[ext_resource type="Script" path="res://src/AlertKiaiPause.cs" id="4_x5woq"]
+[ext_resource type="Script" path="res://src/AlertHeatTimer.cs" id="5_5s4e8"]
+
+[node name="Main" type="Node"]
+script = ExtResource("1_v0osp")
+
+[node name="UI" parent="." instance=ExtResource("1_im120")]
+
+[node name="World" parent="." instance=ExtResource("2_fvmnh")]
+
+[node name="AlertKiaiPauser" type="Node" parent="." node_paths=PackedStringArray("pausable")]
+script = ExtResource("4_x5woq")
+pausable = [NodePath("../World"), NodePath("../AlertHeatTimer")]
+
+[node name="Timer" type="Timer" parent="AlertKiaiPauser"]
+wait_time = 0.75
+one_shot = true
+
+[node name="AlertHeatTimer" type="Node" parent="."]
+script = ExtResource("5_5s4e8")
+
+[node name="Timer" type="Timer" parent="AlertHeatTimer"]
+wait_time = 10.0
+one_shot = true
